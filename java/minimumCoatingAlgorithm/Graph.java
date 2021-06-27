@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Graph
@@ -190,6 +189,28 @@ public class Graph<T>{
         }
         return listRecent;
     }
+    private ArrayList<Hashtag<T>> calculateTagMinimum(NodeGraph<T> vInitial, Hashtag<T> aux){
+        int distance = Integer.MAX_VALUE;
+        ArrayList<Edge<T>> adjacencies = this.getAdjacencies(vInitial);
+        Hashtag<T> acumulative = aux;
+        ArrayList<Hashtag<T>> lisTemporary = new ArrayList<Hashtag<T>>();
+        for (Edge<T> ed: adjacencies) {
+            if (ed.getCost() < distance) {
+                if (acumulative.getCumulativeDistance() > 0) {
+                    lisTemporary.remove(acumulative);
+                }
+                acumulative = new Hashtag<T>(ed.getCost(), ed.getEnd().getElement(), 0);
+                acumulative.setInitialPredecessor(ed.getInitial().getElement());
+                lisTemporary.add(acumulative);
+                distance = ed.getCost();
+            }else if(ed.getCost() == distance){
+                acumulative = new Hashtag<T>(ed.getCost(), ed.getEnd().getElement(), 0);
+                acumulative.setInitialPredecessor(ed.getInitial().getElement());
+                lisTemporary.add(acumulative);
+            }
+        }
+        return lisTemporary;
+    }
 
     /** Algoritmos de recubrimiento minimo */
 
@@ -290,7 +311,48 @@ public class Graph<T>{
         System.out.println(" Longitud de camino = " + costEntire);
     }
 
-    /* Djistra */
-    public void methodDjistra(){
+    
+
+    /* Dijkstra */
+    public void methodDijkstra(T vertex){
+        Hashtag<T> permanent = new Hashtag<T>(0, vertex, 0);
+        NodeGraph<T> vInitial = this.getVertex(vertex);
+        ArrayList<Hashtag<T>> lisTemporary = new ArrayList<Hashtag<T>>();
+        int iteration = 0; 
+        for (int i = 0; i < listVertex.getSize(); i++) {
+            int distance = Integer.MAX_VALUE, index = -1, counter = 0;
+            T edgeVertex = null, initialVertex = null; 
+            lisTemporary.addAll(this.calculateTagMinimum(vInitial, permanent));
+            for (Hashtag<T> hashtag : lisTemporary) {
+                if (hashtag.getCumulativeDistance() < distance) {
+                    distance = hashtag.getCumulativeDistance();
+                    edgeVertex = hashtag.getPredecessorVertex();
+                    initialVertex = hashtag.getInitialPredecessor();
+                    index = counter;
+                }else if (hashtag.getCumulativeDistance() == distance) {
+                    NodeGraph<T> vertexInitial = this.getVertex(edgeVertex);
+                    NodeGraph<T> vertexEquals = this.getVertex(hashtag.getPredecessorVertex());
+                    int costInitial = this.costEdge(vInitial, vertexInitial);
+                    int costEquals = this.costEdge(vInitial, vertexEquals);
+                    if (costInitial > costEquals) {
+                        distance = hashtag.getCumulativeDistance();
+                        edgeVertex = hashtag.getPredecessorVertex();
+                        initialVertex = hashtag.getInitialPredecessor();
+                        index = counter;
+                    }
+                }
+                counter++;
+            }
+            if (index > -1) {
+                lisTemporary.remove(index);
+                permanent.setCumulativeDistance(distance);
+                permanent.setPredecessorVertex(initialVertex);
+                permanent.setIterationNumber(iteration);
+                permanent.setInitialPredecessor(edgeVertex);
+                vInitial = this.getVertex(edgeVertex);
+            }
+            iteration++;
+        }
+        System.out.println("Longitud de camino: ("+permanent.getCumulativeDistance()+", "+permanent.getPredecessorVertex()+") "+permanent.getIterationNumber());
     }
 }
