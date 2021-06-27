@@ -1,7 +1,7 @@
 # My Dotfiles
-_Basic code studied to expand my knowledge_
+Basic code studied to expand my knowledge
 
-_below their respective readme:_
+below their respective readme:
 
  * [Python](https://github.com/jeirf12/dotfiles/blob/main/python/readme.md)
  * [Java](https://github.com/jeirf12/dotfiles/blob/main/java/readme.md)
