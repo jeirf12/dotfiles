@@ -189,6 +189,7 @@ public class Graph<T>{
         }
         return listRecent;
     }
+
     private ArrayList<Hashtag<T>> calculateTagMinimum(NodeGraph<T> vInitial, Hashtag<T> aux){
         int distance = Integer.MAX_VALUE;
         ArrayList<Edge<T>> adjacencies = this.getAdjacencies(vInitial);
@@ -210,6 +211,21 @@ public class Graph<T>{
             }
         }
         return lisTemporary;
+    }
+
+    private ArrayList<Edge<T>> filteredAdyancencies(ArrayList<Edge<T>> adjacencies, NodeGraph<T> nInitial){
+        int counter = 0;
+        NodeList<NodeGraph<T>> aux2 = nInitial.getListNode().getHead();
+        while(aux2 != null){
+            if(counter == nInitial.getListNode().getSize()-1){
+                int costEnd = this.costEdge(nInitial, aux2.getDate());
+                Edge<T> edge = new Edge<>(nInitial, aux2.getDate(), costEnd);
+                adjacencies.add(edge);
+            }
+            counter++;
+            aux2 = aux2.getNext();
+        }
+        return adjacencies;
     }
 
     /** Algoritmos de recubrimiento minimo */
@@ -251,21 +267,10 @@ public class Graph<T>{
             int size = adjacencies.size();
             Edge<T> edgeTemp = null;
             if (size == 0 && i < sizeVertex - 1) {
-                NodeList<NodeGraph<T>> aux2 = nInitial.getListNode().getHead();
-                int counter = 0;
-                while (aux2 != null) {
-                    if (counter == nInitial.getListNode().getSize()-1) {
-                        int costEnd = this.costEdge(nInitial, aux2.getDate());
-                        Edge<T> edge = new Edge<T>(nInitial, aux2.getDate(), costEnd);    
-                        adjacencies.add(edge);
-                    }
-                    counter++;
-                    aux2 = aux2.getNext();
-                }
+                adjacencies = this.filteredAdyancencies(adjacencies, nInitial);
                 vInitial = nInitial;
                 size = adjacencies.size();
             }
-            nInitial = vInitial;
             if (size > 0) {
                 nEnd = adjacencies.get(size-1).getEnd();
                 cost = adjacencies.get(size-1).getCost();
