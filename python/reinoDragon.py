@@ -31,7 +31,7 @@ def cheqcueva(CambiarCueva):
 def CambiarCueva():
     cueva = ""
     while cueva != "1" and cueva != "2":
-        print ("Ha que cueva quieres entrar? 1 o 2?")
+        print ("¿A que cueva quieres entrar? 1 o 2?")
         cueva = input()
 
     return cueva

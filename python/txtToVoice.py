@@ -2,6 +2,13 @@ from gtts import gTTS
 from deep_translator import GoogleTranslator
 import os
 
+def autoOpenOperativo():
+    name = os.name
+    if name == "posix":
+        os.system("gio open audioConverted.mp3")
+    elif name in ("ce", "nt", "dos"):
+        os.system("start audioConverted.mp3")
+
 #texto que se ingresa por consola
 text = input("Insert text for convert to audio: ")
 language = input("Insert the language of translator: ")
@@ -24,4 +31,4 @@ tts.save("audioConverted.mp3")
 
 #OPCIONAL: sirve para abrir el archivo
 #si no desea abrirlo puede comentar la linea
-os.system("gio open audioConverted.mp3")
+autoOpenOperativo()
