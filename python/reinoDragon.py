@@ -1,3 +1,4 @@
+#! python
 import random
 import time
 

@@ -1,3 +1,4 @@
+#! python
 import pyshorteners
 import qrcode
 import sys
