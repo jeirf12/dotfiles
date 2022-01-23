@@ -4,7 +4,7 @@ remove := rm
 
 ifeq ($(OS),Windows_NT)
 	remove := del
-else
+endif
 
 all: 
 	@$(CC) *.java
