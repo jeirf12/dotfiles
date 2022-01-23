@@ -1,11 +1,10 @@
 CC:=javac
 archives:=*.class
+remove := rm
 
 ifeq ($(OS),Windows_NT)
 	remove := del
 else
-	remove := rm
-endif
 
 all: 
 	@$(CC) *.java
