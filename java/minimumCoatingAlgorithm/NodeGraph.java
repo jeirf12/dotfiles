@@ -1,4 +1,4 @@
-public class NodeGraph<T>{
+public class NodeGraph<T> {
     private List<NodeGraph<T>> listNode;
     private T element;
 
@@ -7,11 +7,11 @@ public class NodeGraph<T>{
         this.listNode = new List<NodeGraph<T>>();
     }
 
-    public void setListNode(NodeGraph<T> value, int cost){
+    public void setListNode(NodeGraph<T> value, int cost) {
         this.listNode.add(value, cost);
     }
 
-    public List<NodeGraph<T>> getListNode(){
+    public List<NodeGraph<T>> getListNode() {
         return this.listNode;
     }
 
@@ -19,25 +19,25 @@ public class NodeGraph<T>{
         this.element = element;
     }
 
-    public T getElement(){
+    public T getElement() {
         return this.element;
     }
 
-    public void deleteNode(NodeGraph<T> node){
+    public void deleteNode(NodeGraph<T> node) {
         this.listNode.delete(node);
     }
 
-    public boolean isNode(NodeGraph<T> node){
+    public boolean isNode(NodeGraph<T> node) {
         return this.listNode.isOnList(node);
     }
 
-    public void printNodeList(){
+    public void printNodeList() {
         this.printNodeList(this.listNode.getHead());
     }
 
-    private void printNodeList(NodeList<NodeGraph<T>> aux){
+    private void printNodeList(NodeList<NodeGraph<T>> aux) {
         if (aux != null) {
-            System.out.print("["+aux.getDate().getElement()+", "+aux.getCost()+"]");
+            System.out.print("[" + aux.getDate().getElement() + ", " + aux.getCost() + "]");
             this.printNodeList(aux.getNext());
         }
     }

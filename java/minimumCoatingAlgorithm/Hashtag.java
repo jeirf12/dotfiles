@@ -14,7 +14,7 @@ public class Hashtag<T>{
         this.predecessorVertex = predecessorVertex;
     }
 
-    public T getPredecessorVertex(){
+    public T getPredecessorVertex() {
         return this.predecessorVertex;
     }
     
@@ -22,22 +22,23 @@ public class Hashtag<T>{
         this.initialPredecessor = initialPredecessor;
     }
 
-    public T getInitialPredecessor(){
+    public T getInitialPredecessor() {
         return this.initialPredecessor;
     }
-    public void setCumulativeDistance(int cumulativeDistance){
+
+    public void setCumulativeDistance(int cumulativeDistance) {
         this.cumulativeDistance += cumulativeDistance;
     }
     
-    public int getCumulativeDistance(){
+    public int getCumulativeDistance() {
         return this.cumulativeDistance;
     }
 
-    public void setIterationNumber(int iterationNumber){
+    public void setIterationNumber(int iterationNumber) {
         this.iterationNumber = iterationNumber;
     }
 
-    public int getIterationNumber(){
+    public int getIterationNumber() {
         return this.iterationNumber;
     }
 }

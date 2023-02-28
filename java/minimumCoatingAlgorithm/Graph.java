@@ -3,14 +3,14 @@ import java.util.ArrayList;
 /**
  * Graph
  */
-public class Graph<T>{
+public class Graph<T> {
     private List<NodeGraph<T>> listVertex;
 
     public Graph() {
         this.listVertex = new List<NodeGraph<T>>();
     }
 
-    public void addVertex(T vertex){
+    public void addVertex(T vertex) {
         if (!isVertex(vertex)) {
             NodeGraph<T> recent = new NodeGraph<T>(vertex);
             this.listVertex.add(recent);
@@ -26,25 +26,25 @@ public class Graph<T>{
                         NodeGraph<T> nEnd = this.getVertex(end);
                         nInitial.setListNode(nEnd, cost);
                         nEnd.setListNode(nInitial, cost);
-                    }else{
+                    } else {
                         System.out.println("La arista ya existe");
                     }
-                } else{
+                } else {
                     System.out.println("Algunos de los vertices no existe");
                 }
-            }else{
+            } else {
                 System.out.println("Los vertices no pueden ser iguales");
             }
-        }else{
+        } else {
             System.out.println("El coste debe ser mayor a cero");
         }
     }
 
-    public void printVertex(){
+    public void printVertex() {
         this.printVertex(this.listVertex.getHead());
     }
 
-    private void printVertex(NodeList<NodeGraph<T>> aux){
+    private void printVertex(NodeList<NodeGraph<T>> aux) {
         if (!this.isEmpty(aux)) {
             System.out.print(aux.getDate().getElement()+" ->");
             aux.getDate().printNodeList();
@@ -53,7 +53,7 @@ public class Graph<T>{
         }
     }
 
-    private boolean isEdge(T initial, T end){
+    private boolean isEdge(T initial, T end) {
         if (this.isVertex(initial) && this.isVertex(end)) {
             NodeGraph<T> nInitial = this.getVertex(initial);
             NodeGraph<T> nEnd = this.getVertex(end);
@@ -64,11 +64,11 @@ public class Graph<T>{
         return false;
     }
 
-    private NodeGraph<T> getVertex(T vertex){
+    private NodeGraph<T> getVertex(T vertex) {
         return this.getVertex(this.listVertex.getHead(), vertex);
     }
 
-    private NodeGraph<T> getVertex(NodeList<NodeGraph<T>> aux, T vertex){
+    private NodeGraph<T> getVertex(NodeList<NodeGraph<T>> aux, T vertex) {
         if (!this.isEmpty(aux)) {
             if (aux.getDate().getElement().equals(vertex)) {
                 return aux.getDate();
@@ -92,19 +92,19 @@ public class Graph<T>{
         return false;
     }
 
-    private boolean isEmpty(NodeList<NodeGraph<T>> aux){
+    private boolean isEmpty(NodeList<NodeGraph<T>> aux) {
         return aux == null;
     }
 
-    public List<NodeGraph<T>> getListVertex(){
+    public List<NodeGraph<T>> getListVertex() {
         return this.listVertex;
     }
 
-    private int costEdge(NodeGraph<T> initial, NodeGraph<T> end){
-        return costEdge(initial.getListNode().getHead(), end);
+    private int costEdge(NodeGraph<T> initial, NodeGraph<T> end) {
+        return this.costEdge(initial.getListNode().getHead(), end);
     }
 
-    private int costEdge(NodeList<NodeGraph<T>> aux, NodeGraph<T> end){
+    private int costEdge(NodeList<NodeGraph<T>> aux, NodeGraph<T> end) {
         if (!this.isEmpty(aux)) {
             if (!aux.getDate().equals(end)) {
                 return this.costEdge(aux.getNext(), end);
@@ -114,7 +114,7 @@ public class Graph<T>{
         return 0;
     }
 
-    private ArrayList<Edge<T>> getEdges(){
+    private ArrayList<Edge<T>> getEdges() {
         List<NodeGraph<T>> tempList = listVertex;
         NodeList<NodeGraph<T>> aux = tempList.getHead();
         ArrayList<Edge<T>> list = new ArrayList<Edge<T>>();
@@ -133,7 +133,7 @@ public class Graph<T>{
         return list;
     }
 
-    private ArrayList<Edge<T>> quicksort(ArrayList<Edge<T>> list){
+    private ArrayList<Edge<T>> quicksort(ArrayList<Edge<T>> list) {
         if (list.size() > 0) {
             int positionPivote = Math.round(list.size()/2);
             ArrayList<Edge<T>> left = new ArrayList<Edge<T>>();
@@ -156,7 +156,7 @@ public class Graph<T>{
         return list;
     }
 
-    private void addVertexDinamic(NodeList<NodeGraph<T>> aux, Graph<T> graph){
+    private void addVertexDinamic(NodeList<NodeGraph<T>> aux, Graph<T> graph) {
         if (!this.isEmpty(aux)) {
             graph.addVertex(aux.getDate().getElement());
             this.addVertexDinamic(aux.getNext(), graph);
@@ -175,7 +175,7 @@ public class Graph<T>{
         return false;
     }
 
-    private ArrayList<Edge<T>> getAdjacencies(NodeGraph<T> head){
+    private ArrayList<Edge<T>> getAdjacencies(NodeGraph<T> head) {
         List<NodeGraph<T>> tempList = head.getListNode();
         NodeList<NodeGraph<T>> aux = tempList.getHead();
         ArrayList<Edge<T>> listRecent = new ArrayList<Edge<T>>();
@@ -190,7 +190,7 @@ public class Graph<T>{
         return listRecent;
     }
 
-    private ArrayList<Hashtag<T>> calculateTagMinimum(NodeGraph<T> vInitial, Hashtag<T> aux){
+    private ArrayList<Hashtag<T>> calculateTagMinimum(NodeGraph<T> vInitial, Hashtag<T> aux) {
         int distance = Integer.MAX_VALUE;
         ArrayList<Edge<T>> adjacencies = this.getAdjacencies(vInitial);
         Hashtag<T> acumulative = aux;
@@ -204,7 +204,7 @@ public class Graph<T>{
                 acumulative.setInitialPredecessor(ed.getInitial().getElement());
                 lisTemporary.add(acumulative);
                 distance = ed.getCost();
-            }else if(ed.getCost() == distance){
+            }else if(ed.getCost() == distance) {
                 acumulative = new Hashtag<T>(ed.getCost(), ed.getEnd().getElement(), 0);
                 acumulative.setInitialPredecessor(ed.getInitial().getElement());
                 lisTemporary.add(acumulative);
@@ -213,7 +213,7 @@ public class Graph<T>{
         return lisTemporary;
     }
 
-    private ArrayList<Edge<T>> filteredAdyancencies(ArrayList<Edge<T>> adjacencies, NodeGraph<T> nInitial){
+    private ArrayList<Edge<T>> filteredAdyancencies(ArrayList<Edge<T>> adjacencies, NodeGraph<T> nInitial) {
         int counter = 0;
         NodeList<NodeGraph<T>> aux2 = nInitial.getListNode().getHead();
         while(aux2 != null){
@@ -231,11 +231,11 @@ public class Graph<T>{
     /** Algoritmos de recubrimiento minimo */
 
     /* Kruskal */
-    public void methodKruskal(){
-        int sizeVertex = listVertex.getSize(), counter = 0, cost = 0;
+    public void methodKruskal() {
+        int sizeVertex = this.listVertex.getSize(), counter = 0, cost = 0;
         ArrayList<Edge<T>> list = this.quicksort(this.getEdges());
         Graph<T> graphKruskal = new Graph<T>();
-        this.addVertexDinamic(listVertex.getHead(), graphKruskal);
+        this.addVertexDinamic(this.listVertex.getHead(), graphKruskal);
         System.out.print("T = ");
         for (Edge<T> edge : list) {
             NodeGraph<T> initial = edge.getInitial();
@@ -253,7 +253,7 @@ public class Graph<T>{
     /* Prim */
     public void methodPrim(T vertex) {
         Graph<T> graphPrim = new Graph<T>();
-        this.addVertexDinamic(listVertex.getHead(), graphPrim);
+        this.addVertexDinamic(this.listVertex.getHead(), graphPrim);
         int cost = 0,costEntire = 0;
         System.out.print("T = ");
         NodeGraph<T> vInitial = this.getVertex(vertex);
@@ -261,7 +261,7 @@ public class Graph<T>{
         ArrayList<Edge<T>> temp = new ArrayList<Edge<T>>();
         NodeGraph<T> nInitial = null;
         NodeGraph<T> nEnd = null;
-        int sizeVertex = listVertex.getSize();
+        int sizeVertex = this.listVertex.getSize();
         for (int i = 0; i < sizeVertex; i++) {
             ArrayList<Edge<T>> adjacencies = this.quicksort(this.getAdjacencies(vInitial));
             int size = adjacencies.size();
@@ -279,8 +279,7 @@ public class Graph<T>{
                         nInitial = edge.getInitial();
                         nEnd = edge.getEnd();
                         cost = edge.getCost();
-                    } 
-                    else {
+                    } else {
                         if (!visited.contains(edge)) {
                             visited.add(edge);
                         }
@@ -319,7 +318,7 @@ public class Graph<T>{
     
 
     /* Dijkstra */
-    public void methodDijkstra(T vertex){
+    public void methodDijkstra(T vertex) {
         Hashtag<T> permanent = new Hashtag<T>(0, vertex, 0);
         NodeGraph<T> vInitial = this.getVertex(vertex);
         ArrayList<Hashtag<T>> lisTemporary = new ArrayList<Hashtag<T>>();

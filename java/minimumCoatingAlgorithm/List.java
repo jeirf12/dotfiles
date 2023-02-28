@@ -1,12 +1,12 @@
-public class List<T>{
+public class List<T> {
 	private NodeList<T> head;
 	private int size;
 	
-	public void add(T date){
+	public void add(T date) {
 		NodeList<T> recent = new NodeList<T>(date);
-		if(!this.isEmpty()){
-			this.add(this.head, recent);
-		}else{
+		if(!this.isEmpty()) {
+			this.add(this.head).setNext(recent);
+		} else {
 			head = recent;
 		}
 		this.size++;
@@ -15,19 +15,18 @@ public class List<T>{
 	public void add(T date, int cost) {
 		NodeList<T> recent = new NodeList<T>(date, cost);
 		if(!this.isEmpty()){
-			this.add(this.head, recent);
+			this.add(this.head).setNext(recent);;
 		}else{
 			head = recent;
 		}
 		this.size++;
 	}
 
-	private void add(NodeList<T> aux, NodeList<T> recent){
+	private NodeList<T> add(NodeList<T> aux) {
 		if (aux.getNext() != null) {
-			this.add(aux.getNext(), recent);
-		}else{
-			aux.setNext(recent);
+			return this.add(aux.getNext());
 		}
+		return aux;
 	}
 
 	public void delete(T date) {
@@ -39,7 +38,7 @@ public class List<T>{
 		this.size--;
 	}
 
-	private void delete(NodeList<T> aux, T date){
+	private void delete(NodeList<T> aux, T date) {
 		if(aux.getNext() != null){
 			if (aux.getNext().getDate().equals(date)) {
 				aux.setNext(aux.getNext().getNext());
@@ -49,11 +48,11 @@ public class List<T>{
 		}
 	}
 
-	public boolean isOnList(T date){
+	public boolean isOnList(T date) {
 		return this.isOnList(this.head, date);
 	}
 
-	private boolean isOnList(NodeList<T> aux, T date){
+	private boolean isOnList(NodeList<T> aux, T date) {
 		if(aux != null){
 			if (!aux.equals(date)) {
 				return this.isOnList(aux.getNext(), date);
@@ -67,11 +66,11 @@ public class List<T>{
 		this.head = head;
 	}
 
-	public NodeList<T> getHead(){
+	public NodeList<T> getHead() {
 		return this.head;
 	}
 	
-	public void setSize(int size){
+	public void setSize(int size) {
 		this.size = size;
 	}
 

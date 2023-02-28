@@ -1,4 +1,4 @@
-public class Test<T>{
+public class Test<T> {
 
     public static void main(String[] args) {
         /**
@@ -60,7 +60,7 @@ public class Test<T>{
         /**
          * Metodos de recubrimiento mínimo descomente de a uno
          */
-        // grafoLetras.methodKruskal();
+        grafoLetras.methodKruskal();
         // grafoLetras.methodPrim("A");
         // grafoLetras.methodDijkstra("A");
     }

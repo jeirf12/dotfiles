@@ -1,4 +1,4 @@
-public class NodeList<T>{
+public class NodeList<T> {
 	private T date;
 	private int cost;
 	private NodeList<T> next;

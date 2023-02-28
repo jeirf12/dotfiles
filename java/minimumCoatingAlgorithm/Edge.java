@@ -1,5 +1,4 @@
-
-public class Edge<T>{
+public class Edge<T> {
 	private NodeGraph<T> initial;
 	private NodeGraph<T> end;
 	private int cost;
@@ -14,11 +13,11 @@ public class Edge<T>{
 		this.initial = initial;
 	}
 
-	public NodeGraph<T> getInitial(){
+	public NodeGraph<T> getInitial() {
 		return this.initial;
 	}
 
-	public void setEnd(NodeGraph<T> end){
+	public void setEnd(NodeGraph<T> end) {
 		this.end = end;
 	}
 	
@@ -30,7 +29,7 @@ public class Edge<T>{
 		this.cost = cost;
 	}
 
-	public int getCost(){
+	public int getCost() {
 		return this.cost;
 	}
 }
