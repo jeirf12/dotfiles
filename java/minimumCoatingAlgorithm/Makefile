@@ -1,16 +1,23 @@
 CC:=javac
-archives:=*.class
-remove := rm
+archives:=*.jar
+folder:=bin
+remove:=rm
+removeFolder:=rmdir
 
 ifeq ($(OS),Windows_NT)
-	remove := del
+	remove:=del
+	removeFolder:=rd /s/q
 endif
 
 all: 
-	@$(CC) *.java
+	@$(CC) -d bin -sourcepath src src/negocio/*
+	@$(CC) -d bin -sourcepath src src/presentacion/* -cp bin
+	@jar cf minimumCoatingAlgorithm.jar -C bin .
 
 run:
-	@java Test
+	@java -cp minimumCoatingAlgorithm.jar Test
 
 clean:
 	@$(remove) $(archives)
+	@$(removeFolder) $(folder)
+
