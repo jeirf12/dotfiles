@@ -2,7 +2,7 @@ CC:=javac
 archives:=*.jar
 folder:=bin
 remove:=rm
-removeFolder:=rmdir
+removeFolder:=rm -rf
 
 ifeq ($(OS),Windows_NT)
 	remove:=del
