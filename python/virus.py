@@ -1,21 +1,21 @@
-import turtle
+from turtle import *
 
 a = 0
 b = 0
 
-turtle.bgcolor("black")
-turtle.speed(0)
-turtle.pencolor("green")
-turtle.penup()
-turtle.goto(0, 200)
-turtle.pendown()
-turtle.hideturtle()
+bgcolor("black")
+speed(0)
+pencolor("green")
+penup()
+goto(0, 200)
+pendown()
+hideturtle()
 
 while True:
-    turtle.forward(a)
-    turtle.right(b)
+    forward(a)
+    right(b)
     a+=3
     b+=1
     if b == 200: break
 
-turtle.exitonclick()
+exitonclick()
