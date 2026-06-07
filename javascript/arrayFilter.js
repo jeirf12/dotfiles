@@ -7,5 +7,5 @@ const pets = [
 	{name: 'manini', age: 13, race: 'chicken'},
 ];
 
-const dogsFiltered = pets.filter(x => x.race == 'dog')
+const dogsFiltered = pets.filter(x => x.race === 'dog')
 console.log(dogsFiltered)

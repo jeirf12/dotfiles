@@ -6,9 +6,7 @@
 
 // f()
 
-require('isomorphic-fetch')
-
-const crudder = domain => recurso =>{
+const crudder = domain => recurso => {
 	const url = `${domain}/${recurso}`
 
 	return ({

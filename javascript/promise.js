@@ -12,7 +12,7 @@ const delayed = x => new Promise((resolve, reject) => setTimeout(() => resolve(x
 delayed(7)
 	.then(x => {
 		console.log(x)
-		return delayed(x+7)
+		return delayed(x + 7)
 	})
 	.then(x => console.log(x))
 	.then(x => Promise.reject('ERROR'))
